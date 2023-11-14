@@ -123,18 +123,34 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			}
 
 			//上移動デバッグ用
-			if (keys[DIK_W] != 0 && preKeys[DIK_W] == 0) {
+			if (keys[DIK_W]) {
 				player.pos.y -= speed;
 			}
 			//下移動デバッグ用
-			if (keys[DIK_S] != 0 && preKeys[DIK_S] == 0) {
+			if (keys[DIK_S]) {
 				player.pos.y += speed;
 			}
 
+			//map
+			for (int i = 0; i < 24; i++) {
+				for (int j = 0; j < 18; j++) {
+					if (map[i][j] == 1) {
+						block.x = (float)j * 64;
+						block.y = (float)i * 64;
+						Novice::DrawSprite((int)block.x, (int)block.y, blockGH, 1, 1, 0.0f, 0xFFFFFFFF);
+					}
+					else {
+						Novice::DrawSprite((int)block.x, (int)block.y, blockGH, 1, 1, 0.0f, 0x000000FF);
+					}
+				}
+			}
 
-			Novice::DrawSprite((int)block.x, (int)block.y, blockGH, 1, 1, 0.0f, 0xFFFFFFFF);
+
+
+
 			Novice::DrawSprite((int)player.pos.x, (int)player.pos.y, tantei, 1, 1, 0.0f, 0xFFFFFFFF);
 			break;
+
 		case result:
 
 			break;
