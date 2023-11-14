@@ -77,7 +77,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		result
 	};
 
-
+	int speed = 5;
 	int scenecount = 0;
 	// キー入力結果を受け取る箱
 	char keys[256] = { 0 };
@@ -93,7 +93,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		int blockGH = Novice::LoadTexture("./block.png");
 		int tantei = Novice::LoadTexture("./tantei.png");
 
-		
+
 		// キー入力を受け取る
 		memcpy(preKeys, keys, 256);
 		Novice::GetHitKeyStateAll(keys);
@@ -113,7 +113,23 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			}
 			break;
 		case play:
+			//左移動
+			if (keys[DIK_A]) {
+				player.pos.x -= speed;
+			}
+			//右移動
+			if (keys[DIK_D]) {
+				player.pos.x += speed;
+			}
 
+			//上移動デバッグ用
+			if (keys[DIK_W] != 0 && preKeys[DIK_W] == 0) {
+				player.pos.y -= speed;
+			}
+			//下移動デバッグ用
+			if (keys[DIK_S] != 0 && preKeys[DIK_S] == 0) {
+				player.pos.y += speed;
+			}
 
 
 			Novice::DrawSprite((int)block.x, (int)block.y, blockGH, 1, 1, 0.0f, 0xFFFFFFFF);
